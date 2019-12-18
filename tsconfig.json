@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "declaration": true,

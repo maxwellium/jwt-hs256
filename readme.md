@@ -17,11 +17,9 @@ console.log( extractHS256Token(
 (see test/index.ts).
 You can test the results on https://jwt.io/ .
 
-JWT format generally is ``` `${header}.${payload}.${signature}` ```. In the case of HS256 the header will always equal base64urlencoded ```{ alg: 'HS256', typ: 'JWT' }```. For the sake of speed and bandwidth, the header might be omitted, in which case ```extractHS256Token``` will assume it when encountering a string ``` `${payload}.${signature}` ``` check the test/index.ts to see an example.
-
 
 ---
 
-Copyright (c) 2019 **Max Dancau**
+Copyright (c) 2020 **Max Dancau**
 
 License **MIT**

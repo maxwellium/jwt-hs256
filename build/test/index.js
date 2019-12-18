@@ -9,11 +9,6 @@ exports.FIXTURES = {
         o: { sub: '1234567890', name: 'John Doe' },
         k: 'test'
     },
-    HS256TokenShort: {
-        i: `eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0.aXzC7q7z1lX_hxk5P0R368xEU7H1xRwnBQQcLAmG0EY`,
-        o: { sub: '1234567890', name: 'John Doe' },
-        k: 'test'
-    },
     base64urlEncode: {
         i: `!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^\`abcdefghijklmnopqrstuvwxyz{|}~`,
         o: `ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5gYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXp7fH1-`
@@ -29,9 +24,6 @@ function run() {
     console.log('✔ passed');
     console.log('testing extractHS256Token');
     assert_1.deepStrictEqual(src_1.extractHS256Token(exports.FIXTURES.HS256Token.i, exports.FIXTURES.HS256Token.k), exports.FIXTURES.HS256Token.o, `✖ ${exports.FIXTURES.HS256Token.i} did not yield ${exports.FIXTURES.HS256Token.o}`);
-    console.log('✔ passed');
-    console.log('testing extractHS256Token');
-    assert_1.deepStrictEqual(src_1.extractHS256Token(exports.FIXTURES.HS256TokenShort.i, exports.FIXTURES.HS256TokenShort.k), exports.FIXTURES.HS256TokenShort.o, `✖ ${exports.FIXTURES.HS256TokenShort.i} did not yield ${exports.FIXTURES.HS256TokenShort.o}`);
     console.log('✔ passed');
     console.log('testing base64urlEncode');
     assert_1.strictEqual(base64url_1.base64urlEncode(exports.FIXTURES.base64urlEncode.i), exports.FIXTURES.base64urlEncode.o, `✖ ${exports.FIXTURES.base64urlEncode.i} did not yield ${exports.FIXTURES.base64urlEncode.o}`);

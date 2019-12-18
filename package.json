@@ -16,7 +16,7 @@
     "compile": "tsc -p ."
   },
   "devDependencies": {
-    "@types/node": "^11.10.4",
-    "typescript": "~3.1.0"
+    "@types/node": "^12.12.20",
+    "typescript": "^3.7.3"
   }
 }

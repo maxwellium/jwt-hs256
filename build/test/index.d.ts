@@ -7,14 +7,6 @@ export declare const FIXTURES: {
         };
         k: string;
     };
-    HS256TokenShort: {
-        i: string;
-        o: {
-            sub: string;
-            name: string;
-        };
-        k: string;
-    };
     base64urlEncode: {
         i: string;
         o: string;

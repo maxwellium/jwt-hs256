@@ -10,11 +10,6 @@ export const FIXTURES = {
     o: { sub: '1234567890', name: 'John Doe' },
     k: 'test'
   },
-  HS256TokenShort: {
-    i: `eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0.aXzC7q7z1lX_hxk5P0R368xEU7H1xRwnBQQcLAmG0EY`,
-    o: { sub: '1234567890', name: 'John Doe' },
-    k: 'test'
-  },
   base64urlEncode: {
     i: `!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^\`abcdefghijklmnopqrstuvwxyz{|}~`,
     o: `ISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0-P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5gYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXp7fH1-`
@@ -42,14 +37,6 @@ export function run() {
     extractHS256Token( FIXTURES.HS256Token.i, FIXTURES.HS256Token.k ),
     FIXTURES.HS256Token.o,
     `✖ ${ FIXTURES.HS256Token.i } did not yield ${ FIXTURES.HS256Token.o }`
-  );
-  console.log( '✔ passed' );
-
-  console.log( 'testing extractHS256Token' );
-  deepStrictEqual(
-    extractHS256Token( FIXTURES.HS256TokenShort.i, FIXTURES.HS256TokenShort.k ),
-    FIXTURES.HS256TokenShort.o,
-    `✖ ${ FIXTURES.HS256TokenShort.i } did not yield ${ FIXTURES.HS256TokenShort.o }`
   );
   console.log( '✔ passed' );
 
