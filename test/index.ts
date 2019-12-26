@@ -1,7 +1,7 @@
 import { strictEqual, deepStrictEqual } from 'assert';
 
 import { base64urlEncode, urlEncode, base64urlDecode } from '../src/base64url';
-import { generateHS256Token, extractHS256Token } from '../src';
+import { generateHS256Token, extractHS256Token } from '../src/index';
 
 
 export const FIXTURES = {
@@ -68,3 +68,5 @@ export function run() {
   console.log( '✔ passed' );
 
 }
+
+run();

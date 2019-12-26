@@ -7,12 +7,13 @@
   "files": [
     "build/src"
   ],
+  "type": "module",
   "license": "MIT",
   "author": "maxwellium",
   "repository": "github:maxwellium/jwt-hs256",
   "keywords": [],
   "scripts": {
-    "test": "node -e 'const { run } = require(\"./build/test\"); run();'",
+    "test": "node --es-module-specifier-resolution=node ./build/test",
     "compile": "tsc -p ."
   },
   "devDependencies": {

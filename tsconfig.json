@@ -7,16 +7,16 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
-      "es2018"
+      "es2019"
     ],
-    "module": "commonjs",
+    "module": "esnext",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2018",
+    "target": "es2019",
     "rootDir": ".",
     "outDir": "build"
   },
