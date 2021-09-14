@@ -1,35 +1,27 @@
-import { deepStrictEqual, strictEqual } from 'assert';
-import { base64urlDecode, base64urlEncode, urlEncode } from '../src/base64url';
+import { deepStrictEqual } from 'assert';
 import { extractHS256Token, generateHS256Token } from '../src/index';
 import { FIXTURES } from './fixtures';
-export async function main() {
-    console.log('testing generateHS256Token');
-    for (const fixture of FIXTURES.hs256Token) {
-        deepStrictEqual(generateHS256Token(fixture.o, fixture.k), fixture.i, `✖ ${JSON.stringify(fixture.o)} did not yield ${fixture.i}`);
+const RESET = '\x1b[0m', _red = (text) => ['\x1b[31m', text, RESET].join(''), _green = (text) => ['\x1b[32m', text, RESET].join(''), _bright = (text) => ['\x1b[1m', text, RESET].join('');
+function main() {
+    console.log(_bright('testing generateHS256Token'));
+    for (let i = 0; i < FIXTURES.length; i++) {
+        const fixture = FIXTURES[i];
+        const actual = generateHS256Token(fixture.o, fixture.k);
+        deepStrictEqual(actual, fixture.i, _red(` ✖ ${JSON.stringify(fixture.o)} did not yield ${fixture.i} but ${actual}`));
+        console.log(_green(` ✔ passed fixture ${i}`));
     }
-    console.log('✔ passed');
-    console.log('testing extractHS256Token');
-    for (const fixture of FIXTURES.hs256Token) {
-        deepStrictEqual(extractHS256Token(fixture.i, fixture.k), fixture.o, `✖ ${fixture.i} did not yield ${fixture.o}`);
+    console.log(_bright('testing extractHS256Token'));
+    for (let i = 0; i < FIXTURES.length; i++) {
+        const fixture = FIXTURES[i];
+        try {
+            const actual = extractHS256Token(fixture.i, fixture.k);
+            deepStrictEqual(actual, fixture.o, `${_red(` ✖ failed fixture ${i}`)}\n${fixture.i} did not yield ${fixture.o} but ${actual}`);
+            console.log(_green(` ✔ passed fixture ${i}`));
+        }
+        catch (e) {
+            console.log(_red(` ✖ failed fixture ${i}`), `\n threw before yielding`);
+        }
     }
-    console.log('✔ passed');
-    console.log('testing base64urlEncode');
-    for (const fixture of FIXTURES.base64url) {
-        strictEqual(base64urlEncode(fixture.i), fixture.o, `✖ ${fixture.i} did not yield ${fixture.o}`);
-    }
-    console.log('✔ passed');
-    console.log('testing base64urlDecode');
-    for (const fixture of FIXTURES.base64url) {
-        strictEqual(base64urlDecode(fixture.o), fixture.i, `✖ ${fixture.o} did not yield ${fixture.i}`);
-    }
-    console.log('✔ passed');
-    console.log('testing urlEncode');
-    for (const fixture of FIXTURES.urlEncode) {
-        strictEqual(urlEncode(fixture.i), fixture.o, `✖ ${fixture.i} did not yield ${fixture.o}`);
-    }
-    console.log('✔ passed');
 }
-if (import.meta.url === `file://${process.argv[1]}`) {
-    main();
-}
+main();
 //# sourceMappingURL=test.js.map

@@ -1,37 +1,45 @@
 import { createHmac } from 'crypto';
-import { base64urlEncode, urlEncode, base64urlDecode } from './base64url';
 
+export const HEADER_HS256 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
 
-export function generateHS256Token( payload: any, secret: string ) {
-  const HEADER_HS256 = base64urlEncode( JSON.stringify( { alg: 'HS256', typ: 'JWT' } ) );
-  const data = `${ HEADER_HS256 }.${ base64urlEncode( JSON.stringify( payload ) ) }`;
+export function generateHS256Token<T>(payload: T, secret: string) {
+  const payloadB64url = Buffer
+    .from(JSON.stringify(payload), 'utf-8')
+    .toString('base64url');
+  const data = `${ HEADER_HS256 }.${ payloadB64url }`;
 
-  return `${ data }.${ urlEncode( signHS256( data, secret ) ) }`;
+  return `${ data }.${ signHS256(data, secret).toString('base64url') }`;
 }
 
-export function signHS256( data: string, secret: string ) {
-  return createHmac( 'sha256', secret, {encoding:'utf-8'} )
-    .update( Buffer.from( data, 'utf-8') )
-    .digest( 'base64' );
+
+export function signHS256(data: string, secret: string) {
+  return createHmac('sha256', secret, { encoding: 'utf-8' })
+    .update(Buffer.from(data, 'utf-8'))
+    .digest();
 }
 
-export function verifyHS256Token( token: string, secret: string ) {
-  const [ header, payload, signature ] = token.split( '.' );
+export function verifyHS256Token(token: string, secret: string) {
+  const [ header, payload, signature ] = token.split('.');
 
-  const verify = urlEncode( signHS256( [ header, payload ].join( '.' ), secret ) );
+  if (HEADER_HS256 !== header) { return false; }
+
+  const verify = signHS256([ header, payload ].join('.'), secret).toString('base64url');
 
   return verify === signature;
 }
 
 
-export function extractHS256Token( token: string, secret: string ) {
-  const [ header, payload, signature ] = token.split( '.' );
+export function extractHS256Token<T>(token: string, secret: string) {
 
-  const verify = urlEncode( signHS256( [ header, payload ].join( '.' ), secret ) );
+  const verify = verifyHS256Token(token, secret);
 
-  if ( verify !== signature ) {
-    throw new Error( 'signature mismatch' );
+  if (!verify) {
+    throw new Error('signature mismatch');
   }
 
-  return JSON.parse( base64urlDecode( payload ) );
+  const [ , payloadB64Url ] = token.split('.');
+
+  const payload = Buffer.from(payloadB64Url, 'base64url').toString('utf8');
+
+  return JSON.parse(payload) as T;
 }

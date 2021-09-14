@@ -2,14 +2,10 @@
   "name": "jwt-hs256",
   "version": "2.0.1",
   "description": "",
-  "main": "./build/src/index.js",
-  "types": "./build/src/index.d.ts",
-  "exports": {
-    ".": "./build/src/index.js",
-    "./base64url.js": "./build/src/base64url.js"
-  },
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
   "files": [
-    "./build/src"
+    "build/src"
   ],
   "type": "module",
   "license": "MIT",
@@ -18,10 +14,13 @@
   "keywords": [],
   "scripts": {
     "test": "node --es-module-specifier-resolution=node ./build/test/test.js",
-    "compile": "tsc -p ."
+    "build": "tsc -p ."
   },
   "devDependencies": {
-    "@types/node": "^16.3.3",
-    "typescript": "^4.3.5"
+    "@types/node": "^16.9.1",
+    "typescript": "^4.4.3"
+  },
+  "engines": {
+    "node": ">=15.7"
   }
 }
