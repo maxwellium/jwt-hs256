@@ -1,5 +1,4 @@
-Small zero-dependencies vanilla module to generate, verify and extract [JWTs](https://tools.ietf.org/html/rfc7519) in their most common HS256 (HMAC with SHA-256) 
-variant.
+Small zero-dependencies vanilla module to generate, verify and extract [JWTs](https://tools.ietf.org/html/rfc7519) in their most common HS256 (HMAC with SHA-256) variant.
 
 ```typescript
 console.log( generateHS256Token( {
@@ -14,7 +13,7 @@ console.log( extractHS256Token(
 ) );
 // { sub: '1234567890', name: 'John Doe' }
 ```
-(see test/index.ts).
+(see test/index.test.ts).
 You can test the results on https://jwt.io/ .
 
 
